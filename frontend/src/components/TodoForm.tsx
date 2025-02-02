@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Save, X } from 'lucide-react';
-import { Todo } from '../types/todo';
+import React, { useState, useEffect } from "react";
+import { Plus, Save, X } from "lucide-react";
+import { Todo } from "../types/todo";
 
 interface TodoFormProps {
-  onSubmit: (todo: Omit<Todo, 'id' | 'createdAt'>) => void;
+  onSubmit: (todo: Omit<Todo, "id" | "createdAt">) => void;
   initialData?: Todo | null;
   onCancel?: () => void;
 }
 
-export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCancel }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState<Todo['priority']>('medium');
-  const [dueDate, setDueDate] = useState('');
+export const TodoForm: React.FC<TodoFormProps> = ({
+  onSubmit,
+  initialData,
+  onCancel,
+}) => {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState<Todo["priority"]>("medium");
+  const [dueDate, setDueDate] = useState("");
 
   useEffect(() => {
     if (initialData) {
       setTitle(initialData.title);
-      setDescription(initialData.description || '');
+      setDescription(initialData.description || "");
       setPriority(initialData.priority);
-      setDueDate(initialData.dueDate?.split('T')[0] || '');
+      setDueDate(initialData.due_date?.split("T")[0] || "");
     }
   }, [initialData]);
 
@@ -32,19 +36,22 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
       description,
       priority,
       completed: initialData?.completed || false,
-      dueDate: dueDate || undefined
+      due_date: dueDate || undefined,
     });
 
     if (!initialData) {
-      setTitle('');
-      setDescription('');
-      setPriority('medium');
-      setDueDate('');
+      setTitle("");
+      setDescription("");
+      setPriority("medium");
+      setDueDate("");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700">
+    <form
+      onSubmit={handleSubmit}
+      className="bg-gray-800 p-6 rounded-lg shadow-lg border border-gray-700"
+    >
       <div className="space-y-4">
         <div>
           <input
@@ -56,7 +63,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
             required
           />
         </div>
-        
+
         <div>
           <textarea
             value={description}
@@ -66,12 +73,12 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
             rows={2}
           />
         </div>
-        
+
         <div className="flex space-x-4">
           <div className="flex-1">
             <select
               value={priority}
-              onChange={(e) => setPriority(e.target.value as Todo['priority'])}
+              onChange={(e) => setPriority(e.target.value as Todo["priority"])}
               className="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 text-gray-100"
             >
               <option value="low">Low Priority</option>
@@ -79,7 +86,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
               <option value="high">High Priority</option>
             </select>
           </div>
-          
+
           <div className="flex-1">
             <input
               type="date"
@@ -89,7 +96,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
             />
           </div>
         </div>
-        
+
         <div className="flex space-x-2">
           <button
             type="submit"
@@ -107,7 +114,7 @@ export const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, onCan
               </>
             )}
           </button>
-          
+
           {onCancel && (
             <button
               type="button"

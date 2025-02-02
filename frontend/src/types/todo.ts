@@ -1,9 +1,11 @@
+
 export interface Todo {
   id: string;
   title: string;
   description?: string;
   completed: boolean;
-  createdAt: string;
   priority: 'low' | 'medium' | 'high';
-  dueDate?: string;
+  due_date?: string;
+  created_at?: string;
+  updated_at?: string;
 }

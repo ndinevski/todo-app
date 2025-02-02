@@ -28,9 +28,9 @@ function App() {
 
   const sortTodosByDueDate = (todos: Todo[]): Todo[] => {
     return [...todos].sort((a, b) => {
-      if (!a.dueDate) return 1;
-      if (!b.dueDate) return -1;
-      return new Date(a.dueDate).getTime() - new Date(b.dueDate).getTime();
+      if (!a.due_date) return 1;
+      if (!b.due_date) return -1;
+      return new Date(a.due_date).getTime() - new Date(b.due_date).getTime();
     });
   };
 

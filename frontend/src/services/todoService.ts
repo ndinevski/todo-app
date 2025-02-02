@@ -1,26 +1,70 @@
-import todos from '../data/todos.json';
-import { Todo } from '../types/todo';
+const API_URL = 'http://localhost:8000';
 
-// This service will be replaced with actual API calls later
+export interface Todo {
+  id: string;
+  title: string;
+  description?: string;
+  completed: boolean;
+  priority: 'low' | 'medium' | 'high';
+  due_date?: string;
+  created_at?: string;
+  updated_at?: string;
+}
+
+
 export const todoService = {
   async getTodos(): Promise<Todo[]> {
-    return todos.todos;
+    const response = await fetch(`${API_URL}/api/tasks`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch todos: ${response.statusText}`);
+    }
+    return response.json();
   },
 
   async addTodo(todo: Omit<Todo, 'id' | 'createdAt'>): Promise<Todo> {
-    const newTodo: Todo = {
-      ...todo,
-      id: Math.random().toString(36).substr(2, 9),
-      createdAt: new Date().toISOString()
-    };
-    return newTodo;
+    const response = await fetch(`${API_URL}/api/tasks`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to add todo: ${response.statusText}`);
+    }
+
+    return response.json();
   },
 
   async updateTodo(todo: Todo): Promise<Todo> {
-    return todo;
+    const response = await fetch(`${API_URL}/api/tasks/${todo.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(todo),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to update todo: ${response.statusText}`);
+    }
+
+    return response.json();
   },
 
   async deleteTodo(id: string): Promise<void> {
-    return;
+    const response = await fetch(`${API_URL}/api/tasks/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`Failed to delete todo: ${response.statusText}`);
+    }
   }
 };
