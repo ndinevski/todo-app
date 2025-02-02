@@ -1,0 +1,22 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Complete project proposal",
+      "description": "Write and submit the Q1 project proposal",
+      "completed": false,
+      "createdAt": "2024-03-14T10:00:00Z",
+      "priority": "high",
+      "dueDate": "2024-03-20T23:59:59Z"
+    },
+    {
+      "id": "2",
+      "title": "Weekly team meeting",
+      "description": "Discuss project progress and blockers",
+      "completed": false,
+      "createdAt": "2024-03-14T11:00:00Z",
+      "priority": "medium",
+      "dueDate": "2024-03-15T15:00:00Z"
+    }
+  ]
+}
