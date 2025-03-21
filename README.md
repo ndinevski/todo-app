@@ -1,6 +1,6 @@
 # 📝 Todo App
 
-This is a **Full-Stack Todo App** built with **React (TypeScript)** (frontend) and **Laravel** (backend).  
+This is a **Todo App** built with **React (TypeScript)** (frontend) and **Laravel** (backend).  
 It allows users to **add, edit, delete, and mark tasks as complete**, using a REST API.
 
 ## Showcase
